@@ -11,8 +11,28 @@ config_version=5
 [application]
 
 config/name="5K GameName Game Jam Project"
+run/main_scene="uid://mdmxekr5v6ej"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout=""
+
+[autoload]
+
+SceneManager="*uid://cpbyh6lbdl05q"
+MenuManager="*uid://ds7ajs8tkp0u1"
+InputManager="*uid://bjn5kjtat6ai2"
+SaveManager="*uid://cw3oep51nob8m"
+AudioManager="*uid://wwrsybsbi3rx"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [physics]
 

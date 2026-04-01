@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cq1agth0rai6f"]
+
+[ext_resource type="Script" uid="uid://cbd2h0smmoyco" path="res://scripts/instance/custom/custom_label_button.gd" id="1_k3kri"]
+
+[node name="CustomLabelButton" type="PanelContainer" unique_id=1636015642]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 9.0
+offset_bottom = 20.0
+mouse_filter = 2
+script = ExtResource("1_k3kri")
+
+[node name="Button" type="Button" parent="." unique_id=2043040860]
+layout_mode = 2
+
+[node name="Margins" type="MarginContainer" parent="." unique_id=900074614]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="Margins" unique_id=1537947894]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 8

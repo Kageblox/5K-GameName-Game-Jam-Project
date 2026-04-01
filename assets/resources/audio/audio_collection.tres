@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="AudioDataCollectionResource" format=3 uid="uid://c3txa2rd6w3ic"]
+
+[ext_resource type="Script" uid="uid://cb2jd8tmrei4r" path="res://scripts/resource/audio_data.gd" id="1_6i0bw"]
+[ext_resource type="AudioStream" uid="uid://x4uf7a0d5okt" path="res://assets/audio/background_music/gamejamthief_heist2_audiojungle (1).mp3" id="2_a5c28"]
+[ext_resource type="Script" uid="uid://jf1mff57ft13" path="res://scripts/resource/audio_data_collection.gd" id="2_v8iss"]
+[ext_resource type="AudioStream" uid="uid://drf735vykhpny" path="res://assets/audio/background_music/gamejamthief_test2.mp3" id="3_a5c28"]
+
+[sub_resource type="Resource" id="Resource_7u3ek"]
+script = ExtResource("1_6i0bw")
+stream = ExtResource("2_a5c28")
+inactive_volume_db = -30.0
+bus = "Background Music"
+metadata/_custom_type_script = "uid://cb2jd8tmrei4r"
+
+[sub_resource type="Resource" id="Resource_d7e5b"]
+script = ExtResource("1_6i0bw")
+stream = ExtResource("3_a5c28")
+inactive_volume_db = -30.0
+bus = "Background Music"
+metadata/_custom_type_script = "uid://cb2jd8tmrei4r"
+
+[resource]
+script = ExtResource("2_v8iss")
+audio_data_collection = Dictionary[String, ExtResource("1_6i0bw")]({
+"bgm_1": SubResource("Resource_7u3ek"),
+"bgm_2": SubResource("Resource_d7e5b")
+})
+metadata/_custom_type_script = "uid://jf1mff57ft13"

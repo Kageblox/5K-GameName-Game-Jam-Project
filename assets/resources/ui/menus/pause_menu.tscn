@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://bfbsfjnii4tjd"]
+
+[ext_resource type="Script" uid="uid://1o3gu1yxashv" path="res://scripts/instance/menus/pause_menu.gd" id="1_o0mlv"]
+[ext_resource type="Script" uid="uid://dyfq8hktxbaf7" path="res://scripts/instance/menu_components/menu_color_rect.gd" id="2_sf85l"]
+[ext_resource type="Script" uid="uid://d1gqgx2rvfewv" path="res://scripts/instance/menu_components/menu_position.gd" id="3_nh1f2"]
+[ext_resource type="Script" uid="uid://d17kn7xassnid" path="res://scripts/instance/menu_components/menu_modulate.gd" id="4_5nfo5"]
+[ext_resource type="LabelSettings" uid="uid://j4dw8hvgo5ux" path="res://assets/resources/ui/label_settings/36_white_label_settings.tres" id="5_uxe6r"]
+[ext_resource type="PackedScene" uid="uid://cq1agth0rai6f" path="res://assets/resources/custom/custom_label_button.tscn" id="6_jx8ff"]
+[ext_resource type="LabelSettings" uid="uid://1u84ivmm06ca" path="res://assets/resources/ui/label_settings/16_white_label_settings.tres" id="7_mctrh"]
+
+[node name="PauseMenu" type="Control" unique_id=2059768895]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o0mlv")
+open_duration = 0.75
+close_duration = 0.75
+background_click_closes_menu = true
+
+[node name="MenuColorRect" type="ColorRect" parent="." unique_id=1459416955]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+script = ExtResource("2_sf85l")
+metadata/_custom_type_script = "uid://dyfq8hktxbaf7"
+
+[node name="MenuPosition" type="Control" parent="." unique_id=610919259]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_nh1f2")
+entry_position = 1
+exit_position = 2
+metadata/_custom_type_script = "uid://d1gqgx2rvfewv"
+
+[node name="MenuModulate" type="Control" parent="MenuPosition" unique_id=1766999215]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_5nfo5")
+metadata/_custom_type_script = "uid://d17kn7xassnid"
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuPosition/MenuModulate" unique_id=290089468]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.5
+anchor_right = 0.625
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer" unique_id=84611473]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=245491483]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/MarginContainer" unique_id=2061450360]
+layout_mode = 2
+text = "Paused"
+label_settings = ExtResource("5_uxe6r")
+horizontal_alignment = 1
+
+[node name="QuickSaveButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1636015642 instance=ExtResource("6_jx8ff")]
+layout_mode = 2
+text = "Quick Save"
+label_settings = ExtResource("7_mctrh")
+horizontal_alignment = 1
+
+[node name="SaveGameButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=162831784 instance=ExtResource("6_jx8ff")]
+layout_mode = 2
+text = "Save Game"
+label_settings = ExtResource("7_mctrh")
+horizontal_alignment = 1
+
+[node name="LoadGameButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=604410045 instance=ExtResource("6_jx8ff")]
+layout_mode = 2
+text = "Load Game"
+label_settings = ExtResource("7_mctrh")
+horizontal_alignment = 1
+
+[node name="SettingsButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=104940562 instance=ExtResource("6_jx8ff")]
+layout_mode = 2
+text = "Settings"
+label_settings = ExtResource("7_mctrh")
+horizontal_alignment = 1
+
+[node name="ReturnToMainMenuButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1124747025 instance=ExtResource("6_jx8ff")]
+layout_mode = 2
+text = "Return to Main Menu"
+label_settings = ExtResource("7_mctrh")
+horizontal_alignment = 1
+
+[node name="ContinueGameButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=400570110 instance=ExtResource("6_jx8ff")]
+layout_mode = 2
+text = "Continue Game"
+label_settings = ExtResource("7_mctrh")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/QuickSaveButton" to="." method="_on_quick_save_button_pressed"]
+[connection signal="pressed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/SaveGameButton" to="." method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/LoadGameButton" to="." method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ReturnToMainMenuButton" to="." method="_on_return_to_main_menu_button_pressed"]
+[connection signal="pressed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ContinueGameButton" to="." method="_on_continue_game_button_pressed"]

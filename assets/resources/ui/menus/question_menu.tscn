@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://c1j1ymo7ykwwc"]
+
+[ext_resource type="Script" uid="uid://dyfq8hktxbaf7" path="res://scripts/instance/menu_components/menu_color_rect.gd" id="1_o4q5n"]
+[ext_resource type="Script" uid="uid://b11hyh54gtaqo" path="res://scripts/instance/menus/question_menu.gd" id="1_xccli"]
+[ext_resource type="Script" uid="uid://d1gqgx2rvfewv" path="res://scripts/instance/menu_components/menu_position.gd" id="2_bqs5l"]
+[ext_resource type="PackedScene" uid="uid://cq1agth0rai6f" path="res://assets/resources/custom/custom_label_button.tscn" id="3_fdnmh"]
+[ext_resource type="Script" uid="uid://d17kn7xassnid" path="res://scripts/instance/menu_components/menu_modulate.gd" id="4_6fyrk"]
+[ext_resource type="LabelSettings" uid="uid://1u84ivmm06ca" path="res://assets/resources/ui/label_settings/16_white_label_settings.tres" id="4_bkrv8"]
+
+[node name="QuestionMenu" type="Control" unique_id=161334573 node_paths=PackedStringArray("question_label", "answer_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_xccli")
+question_label = NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/MarginContainer/QuestionLabel")
+answer_button = NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/AnswerButton")
+open_duration = 0.5
+close_duration = 0.5
+background_click_closes_menu = true
+
+[node name="MenuColorRect" type="ColorRect" parent="." unique_id=443676544]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.5019608)
+script = ExtResource("1_o4q5n")
+metadata/_custom_type_script = "uid://dyfq8hktxbaf7"
+
+[node name="MenuPosition" type="Control" parent="." unique_id=934948902]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_bqs5l")
+entry_position = 4
+entry_transition = 10
+exit_position = 3
+exit_transition = 10
+
+[node name="MenuModulate" type="Control" parent="MenuPosition" unique_id=1583556355]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_6fyrk")
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuPosition/MenuModulate" unique_id=825627994]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.5
+anchor_right = 0.625
+anchor_bottom = 0.5
+offset_left = -59.5
+offset_top = -53.0
+offset_right = 19.5
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer" unique_id=109843982]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1038730933]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="QuestionLabel" type="Label" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/MarginContainer" unique_id=947677477]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Question"
+label_settings = ExtResource("4_bkrv8")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1823440231]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AnswerButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1636015642 instance=ExtResource("3_fdnmh")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Answer"
+label_settings = ExtResource("4_bkrv8")
+horizontal_alignment = 1

@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://bnuw4uh4kgrgi"]
+
+[ext_resource type="Script" uid="uid://dyfq8hktxbaf7" path="res://scripts/instance/menu_components/menu_color_rect.gd" id="1_6brnm"]
+[ext_resource type="Script" uid="uid://dqr0aw0eosu5f" path="res://scripts/instance/menus/save_slots_menu.gd" id="1_ivm8b"]
+[ext_resource type="Script" uid="uid://d1gqgx2rvfewv" path="res://scripts/instance/menu_components/menu_position.gd" id="2_ivm8b"]
+[ext_resource type="Script" uid="uid://d17kn7xassnid" path="res://scripts/instance/menu_components/menu_modulate.gd" id="3_ketdt"]
+[ext_resource type="LabelSettings" uid="uid://j4dw8hvgo5ux" path="res://assets/resources/ui/label_settings/36_white_label_settings.tres" id="4_oowy5"]
+[ext_resource type="LabelSettings" uid="uid://0d4vo3h2a51r" path="res://assets/resources/ui/label_settings/24_grey_label_settings.tres" id="5_l287i"]
+[ext_resource type="PackedScene" uid="uid://do3defd3kij5" path="res://assets/resources/ui/items/save_slot.tscn" id="6_ketdt"]
+[ext_resource type="PackedScene" uid="uid://cq1agth0rai6f" path="res://assets/resources/custom/custom_label_button.tscn" id="6_ltqx3"]
+[ext_resource type="LabelSettings" uid="uid://1u84ivmm06ca" path="res://assets/resources/ui/label_settings/16_white_label_settings.tres" id="7_rip2s"]
+
+[node name="SaveSlotsMenu" type="Control" unique_id=297150180 node_paths=PackedStringArray("save_slots_header_label", "autosave_container", "save_slots")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ivm8b")
+save_slots_header_label = NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/MarginContainer/SaveSlotsHeaderLabel")
+autosave_container = NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/AutosaveContainer")
+save_slots = [NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer/SaveSlot1"), NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer/SaveSlot2"), NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer/SaveSlot3"), NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer/SaveSlot4"), NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer/SaveSlot5"), NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/AutosaveContainer/SaveSlot6")]
+open_duration = 0.75
+close_duration = 0.75
+background_click_closes_menu = true
+
+[node name="MenuColorRect" type="ColorRect" parent="." unique_id=511419465]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+script = ExtResource("1_6brnm")
+metadata/_custom_type_script = "uid://dyfq8hktxbaf7"
+
+[node name="MenuPosition" type="Control" parent="." unique_id=2123245193]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ivm8b")
+entry_position = 1
+exit_position = 2
+metadata/_custom_type_script = "uid://d1gqgx2rvfewv"
+
+[node name="MenuModulate" type="Control" parent="MenuPosition" unique_id=1892529767]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_ketdt")
+metadata/_custom_type_script = "uid://d17kn7xassnid"
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuPosition/MenuModulate" unique_id=1804255878]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.125
+anchor_right = 0.75
+anchor_bottom = 0.875
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer" unique_id=508120087]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=849629527]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="SaveSlotsHeaderLabel" type="Label" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/MarginContainer" unique_id=1248129934]
+layout_mode = 2
+text = "Save Slots"
+label_settings = ExtResource("4_oowy5")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=834538463]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SaveSlotsContainer" type="VBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer" unique_id=1381519556]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SaveSlot1" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer" unique_id=620820157 instance=ExtResource("6_ketdt")]
+layout_mode = 2
+
+[node name="SaveSlot2" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer" unique_id=2029436453 instance=ExtResource("6_ketdt")]
+layout_mode = 2
+
+[node name="SaveSlot3" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer" unique_id=406381699 instance=ExtResource("6_ketdt")]
+layout_mode = 2
+
+[node name="SaveSlot4" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer" unique_id=114895056 instance=ExtResource("6_ketdt")]
+layout_mode = 2
+
+[node name="SaveSlot5" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer" unique_id=1527422210 instance=ExtResource("6_ketdt")]
+layout_mode = 2
+
+[node name="AutosaveContainer" type="VBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=2001863759]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/AutosaveContainer" unique_id=1920766687]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/AutosaveContainer/MarginContainer" unique_id=126020686]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Autosave:"
+label_settings = ExtResource("5_l287i")
+
+[node name="SaveSlot6" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/AutosaveContainer" unique_id=1015536328 instance=ExtResource("6_ketdt")]
+layout_mode = 2
+
+[node name="ReturnButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1636015642 instance=ExtResource("6_ltqx3")]
+layout_mode = 2
+text = "Return"
+label_settings = ExtResource("7_rip2s")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]

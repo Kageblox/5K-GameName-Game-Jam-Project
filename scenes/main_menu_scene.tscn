@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://mdmxekr5v6ej"]
+
+[ext_resource type="Script" uid="uid://ce6nvrr48vlqq" path="res://scripts/scenes/main_menu_scene.gd" id="1_xhf6x"]
+[ext_resource type="PackedScene" uid="uid://cq1agth0rai6f" path="res://assets/resources/custom/custom_label_button.tscn" id="2_vfskp"]
+[ext_resource type="LabelSettings" uid="uid://j4dw8hvgo5ux" path="res://assets/resources/ui/label_settings/36_white_label_settings.tres" id="3_7hcs8"]
+
+[node name="MainMenuScene" type="Node" unique_id=783700535]
+script = ExtResource("1_xhf6x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1137221576]
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.5
+anchor_right = 0.625
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartNewGameButton" parent="VBoxContainer" unique_id=1636015642 instance=ExtResource("2_vfskp")]
+layout_mode = 2
+text = "Start New Game"
+label_settings = ExtResource("3_7hcs8")
+horizontal_alignment = 1
+
+[node name="LoadGameButton" parent="VBoxContainer" unique_id=781908367 instance=ExtResource("2_vfskp")]
+layout_mode = 2
+text = "Load Game"
+label_settings = ExtResource("3_7hcs8")
+horizontal_alignment = 1
+
+[node name="SettingsButton" parent="VBoxContainer" unique_id=1726437648 instance=ExtResource("2_vfskp")]
+layout_mode = 2
+text = "Settings"
+label_settings = ExtResource("3_7hcs8")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/StartNewGameButton" to="." method="_on_start_new_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadGameButton" to="." method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]

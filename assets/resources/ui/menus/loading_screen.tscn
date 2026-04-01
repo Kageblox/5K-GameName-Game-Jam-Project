@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://q7ikye3k3pdt"]
+
+[ext_resource type="Script" uid="uid://bmecqshpq7sbr" path="res://scripts/instance/menu.gd" id="1_te4of"]
+[ext_resource type="Script" uid="uid://dyfq8hktxbaf7" path="res://scripts/instance/menu_components/menu_color_rect.gd" id="2_2tejv"]
+
+[node name="LoadingScreen" type="Control" unique_id=1963463342]
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_te4of")
+queue_free_on_close = false
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=957084981]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+script = ExtResource("2_2tejv")
+visible_color = Color(0, 0, 0, 1)
+metadata/_custom_type_script = "uid://dyfq8hktxbaf7"

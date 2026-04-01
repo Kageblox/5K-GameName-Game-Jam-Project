@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://4dylvnfb7ci"]
+
+[ext_resource type="Texture2D" uid="uid://d0qtcqci4kujy" path="res://assets/textures/ui/pause_24dp_808080_FILL0_wght400_GRAD0_opsz24.svg" id="2_domql"]
+[ext_resource type="Script" uid="uid://d27ckm3200nph" path="res://scripts/instance/buttons/pause_button.gd" id="3_4flv1"]
+[ext_resource type="Texture2D" uid="uid://i10iabdetj7x" path="res://assets/textures/ui/pause_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" id="3_k8ry4"]
+
+[node name="PauseButton" type="TextureButton" unique_id=1229449624]
+texture_normal = ExtResource("2_domql")
+texture_pressed = ExtResource("2_domql")
+texture_hover = ExtResource("3_k8ry4")
+texture_disabled = ExtResource("2_domql")
+script = ExtResource("3_4flv1")
+metadata/_custom_type_script = "uid://dph34sxr1gilq"
