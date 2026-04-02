@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dhamyd4vegjd6"]
+
+[ext_resource type="Script" uid="uid://bjnpkmlltbppa" path="res://arena/arena.gd" id="1_dkqtx"]
+
+[sub_resource type="Environment" id="Environment_dkqtx"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_u13ga"]
+
+[sub_resource type="Compositor" id="Compositor_dotur"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dkqtx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u13ga"]
+size = Vector3(100, 20, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u13ga"]
+
+[node name="Arena" type="Node3D" unique_id=1651207303]
+script = ExtResource("1_dkqtx")
+
+[node name="Ballpit" type="Node3D" parent="." unique_id=1412063318]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=956771834]
+transform = Transform3D(1, 0, 0, 0, 0.45254368, 0.8917423, 0, -0.8917423, 0.45254368, 0, 18.475916, 8.716454)
+fov = 50.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=485381545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.07727, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=633469180]
+environment = SubResource("Environment_dkqtx")
+camera_attributes = SubResource("CameraAttributesPractical_u13ga")
+compositor = SubResource("Compositor_dotur")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1309975421]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.777279, 0)
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_dkqtx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=734563717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1993408, 0)
+mesh = SubResource("BoxMesh_u13ga")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1996871123]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -43.49431, 0)
+shape = SubResource("BoxShape3D_u13ga")
+debug_fill = false
