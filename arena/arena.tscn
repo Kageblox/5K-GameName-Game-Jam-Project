@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dhamyd4vegjd6"]
 
 [ext_resource type="Script" uid="uid://bjnpkmlltbppa" path="res://arena/arena.gd" id="1_dkqtx"]
+[ext_resource type="Script" uid="uid://dmt7fbxwafga4" path="res://arena/fps_label.gd" id="2_u13ga"]
+[ext_resource type="PackedScene" uid="uid://ckltep4un57ip" path="res://arena/player.tscn" id="3_dotur"]
 
 [sub_resource type="Environment" id="Environment_dkqtx"]
 
@@ -21,6 +23,7 @@ script = ExtResource("1_dkqtx")
 [node name="Ballpit" type="Node3D" parent="." unique_id=1412063318]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=956771834]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 0.45254368, 0.8917423, 0, -0.8917423, 0.45254368, 0, 18.475916, 8.716454)
 fov = 50.0
 
@@ -45,3 +48,19 @@ mesh = SubResource("BoxMesh_u13ga")
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -43.49431, 0)
 shape = SubResource("BoxShape3D_u13ga")
 debug_fill = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2009680058]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1851296248]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("2_u13ga")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1611698575]
+
+[node name="Player" parent="." unique_id=1269980912 instance=ExtResource("3_dotur")]
+
+[node name="CameraRig" parent="Player" index="2" unique_id=2064674765]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9503336, 9.70137)
+
+[editable path="Player"]
