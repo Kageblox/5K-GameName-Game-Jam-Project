@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://x4uf7a0d5okt"
+path="res://.godot/imported/gamejamthief_heist2_audiojungle (1).mp3-280888771eacd33e0cb1d23fcc40591a.mp3str"
+
+[deps]
+
+source_file="res://assets/resources/audio/background_music/gamejamthief_heist2_audiojungle (1).mp3"
+dest_files=["res://.godot/imported/gamejamthief_heist2_audiojungle (1).mp3-280888771eacd33e0cb1d23fcc40591a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

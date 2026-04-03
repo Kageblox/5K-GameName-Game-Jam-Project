@@ -8,6 +8,9 @@ extends Control
 
 @export var last_saved_label: Label
 
+func _enter_tree() -> void:
+	focus_entered.connect(save_slot_button.grab_focus)
+
 func load_slot(index: int) -> void:
 	var loaded_game_data = SaveManager.load_game_data(index)
 	if loaded_game_data == null:

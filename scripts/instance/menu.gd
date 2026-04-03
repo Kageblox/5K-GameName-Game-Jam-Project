@@ -17,6 +17,8 @@ signal on_closed_end() ## Emitted at the end of the menu's close animation.
 ## Whether the menu deletes itself upon being closed.
 @export var queue_free_on_close: bool = true
 
+@export var focus_control: Control
+
 var closing = false
 
 func _enter_tree() -> void:
