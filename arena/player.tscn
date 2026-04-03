@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ckltep4un57ip"]
 
-[ext_resource type="Script" uid="uid://bcaehayc32pd1" path="res://arena/camera_rig.gd" id="1_8oq5h"]
+[ext_resource type="Script" uid="uid://cnu4xhcg2nshv" path="res://arena/player.gd" id="1_8oq5h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_287im"]
 
@@ -10,6 +10,9 @@
 
 [node name="Player" type="CharacterBody3D" unique_id=1269980912]
 script = ExtResource("1_8oq5h")
+camera_height = 16.0
+camera_distance = 10.0
+camera_angle = -55.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=918560825]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 4.7233667, 0)
@@ -26,11 +29,6 @@ transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0.3752554, -0.539
 mesh = SubResource("SphereMesh_8oq5h")
 
 [node name="CameraRig" type="Node3D" parent="." unique_id=2064674765]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.644435, 9.70137)
 
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraRig" unique_id=1511245551]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.439794, 0)
-
-[node name="Camera3D" type="Camera3D" parent="CameraRig/SpringArm3D" unique_id=1553219743]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.92481, 0)
+[node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=1553219743]
 current = true
