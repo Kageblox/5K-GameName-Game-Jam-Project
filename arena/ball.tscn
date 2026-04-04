@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://xb61hb2scmpt"]
 
+[ext_resource type="Script" path="res://arena/ball.gd" id="1_script"]
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4ck4e"]
 friction = 10.0
 absorbent = true
@@ -12,6 +14,7 @@ material = SubResource("StandardMaterial3D_4ck4e")
 [sub_resource type="SphereShape3D" id="SphereShape3D_8k60m"]
 
 [node name="Ball" type="RigidBody3D" unique_id=2022834685]
+script = ExtResource("1_script")
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 disable_mode = 2
 collision_layer = 8
