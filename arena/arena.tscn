@@ -51,11 +51,11 @@ script = ExtResource("1_dkqtx")
 white_balls = false
 drop_height = 0.01
 layers = 30
+ball_count = 2000
 first_layer_ball_count = 2000
 final_layer_ball_count = 5000
 arena_width = 200
 arena_height = 200
-drop_time = 3.0
 
 [node name="Ballpit" type="Node3D" parent="." unique_id=1412063318]
 
@@ -124,7 +124,6 @@ process_mode = 4
 
 [node name="MeshInstance3D2" parent="Player/PlayerModel" parent_id_path=PackedInt32Array(1269980912, 1450503455) index="1" unique_id=1187817555]
 process_mode = 4
-visible = false
 
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=956771834]
 transform = Transform3D(1, 0, 0, 0, 0.45254368, 0.8917423, 0, -0.8917423, 0.45254368, 0, 18.475916, 8.716454)
