@@ -1,106 +1,191 @@
 [gd_scene format=3 uid="uid://sj1rv8qnauue"]
 
 [ext_resource type="Script" uid="uid://c7ontc8847l2" path="res://scripts/scenes/another_scene.gd" id="1_subgv"]
+[ext_resource type="Script" uid="uid://cfqxf6uag0g8f" path="res://scripts/instance/hud/HUD.gd" id="2_2b0cp"]
+[ext_resource type="Texture2D" uid="uid://dxlhfxq0jbb4x" path="res://assets/textures/ui/HpNull.png" id="3_5y4t4"]
+[ext_resource type="Texture2D" uid="uid://c2ycryisb34kk" path="res://assets/textures/ui/HpFull.png" id="4_f77vp"]
+[ext_resource type="Texture2D" uid="uid://bh65fdhlvbbef" path="res://assets/textures/ui/HeatNull.png" id="5_f77vp"]
+[ext_resource type="Texture2D" uid="uid://kyh1v6opipo3" path="res://assets/textures/ui/HeatFull.png" id="6_dgk60"]
+[ext_resource type="Texture2D" uid="uid://cykrfmi1ojutj" path="res://assets/textures/vfx/impact_vfx.png" id="8_s8mco"]
 
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_subgv"]
 
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_mtgn6"]
 cutoff_hz = 1.0
 
-[node name="AnotherScene" type="Node" unique_id=887522271 node_paths=PackedStringArray("focus_control")]
+[sub_resource type="Theme" id="Theme_2b0cp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2lln"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uc163"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vd7m0"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xv7ul"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74t2o"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(1024, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bh2ry"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(1280, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e27ax"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(1536, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkb1x"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(1792, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enx0d"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(2048, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70bhm"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(2304, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aet0b"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(2560, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y865a"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(2816, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqoq5"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(3072, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3ch3"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(3328, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdkar"]
+atlas = ExtResource("8_s8mco")
+region = Rect2(3584, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7nep5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2lln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uc163")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vd7m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xv7ul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74t2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bh2ry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e27ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkb1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enx0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70bhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aet0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y865a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqoq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3ch3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdkar")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="AnotherScene" type="Node" unique_id=887522271]
 script = ExtResource("1_subgv")
 inactive_effect = SubResource("AudioEffectLowPassFilter_subgv")
 active_effect = SubResource("AudioEffectLowPassFilter_mtgn6")
 pausable = true
-focus_control = NodePath("CreateAutosaveButton")
 
-[node name="CreateAutosaveButton" type="Button" parent="." unique_id=288574495]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -67.5
-offset_top = -15.5
-offset_right = 67.5
-offset_bottom = 15.5
+[node name="HUD" type="Control" parent="." unique_id=397075674 node_paths=PackedStringArray("health_bar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Create Autosave"
+mouse_filter = 2
+script = ExtResource("2_2b0cp")
+health_bar = NodePath("HealthBar")
 
-[node name="PlayBGM1Button" type="Button" parent="." unique_id=563417910]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = 42.0
-offset_right = 5.0
-offset_bottom = 73.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Play BGM 1"
+[node name="HealthBar" type="TextureProgressBar" parent="HUD" unique_id=1095679413]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_vertical = 0
+theme = SubResource("Theme_2b0cp")
+max_value = 1.0
+step = 0.001
+value = 1.0
+fill_mode = 5
+nine_patch_stretch = true
+texture_under = ExtResource("3_5y4t4")
+texture_progress = ExtResource("4_f77vp")
 
-[node name="PlayBGM2Button" type="Button" parent="." unique_id=505437793]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 27.0
-offset_top = 42.0
-offset_right = 122.0
-offset_bottom = 73.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Play BGM 2"
+[node name="HeatBar" type="TextureProgressBar" parent="HUD" unique_id=928288658]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 0
+theme = SubResource("Theme_2b0cp")
+max_value = 1.0
+step = 0.001
+value = 0.45
+fill_mode = 5
+nine_patch_stretch = true
+texture_under = ExtResource("5_f77vp")
+texture_progress = ExtResource("6_dgk60")
 
-[node name="StopBGMButton" type="Button" parent="." unique_id=623641547]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -29.0
-offset_top = 87.0
-offset_right = 66.0
-offset_bottom = 118.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Stop BGM"
-
-[node name="AddAudioEffectButton" type="Button" parent="." unique_id=1202401049]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -82.0
-offset_top = 141.0
-offset_right = 13.0
-offset_bottom = 172.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Add Audio Effect"
-
-[node name="RemoveAudioEffectButton" type="Button" parent="." unique_id=1795324842]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -118.0
-offset_top = 193.0
-offset_right = 50.0
-offset_bottom = 224.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Remove Audio Effect"
-
-[connection signal="pressed" from="CreateAutosaveButton" to="." method="_on_create_autosave_button_pressed"]
-[connection signal="pressed" from="PlayBGM1Button" to="." method="_on_play_bgm_1_button_pressed"]
-[connection signal="pressed" from="PlayBGM2Button" to="." method="_on_play_bgm_2_button_pressed"]
-[connection signal="pressed" from="StopBGMButton" to="." method="_on_stop_bgm_button_pressed"]
-[connection signal="pressed" from="AddAudioEffectButton" to="." method="_on_add_audio_effect_button_pressed"]
-[connection signal="pressed" from="RemoveAudioEffectButton" to="." method="_on_remove_audio_effect_button_pressed"]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1133315391]
+sprite_frames = SubResource("SpriteFrames_7nep5")
+frame_progress = 0.047664784
+speed_scale = 2.0

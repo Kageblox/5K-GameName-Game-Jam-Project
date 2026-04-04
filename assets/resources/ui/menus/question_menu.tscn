@@ -46,9 +46,9 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_bqs5l")
 entry_position = 4
-entry_transition = 9
+entry_transition = 10
 exit_position = 3
-exit_transition = 9
+exit_transition = 10
 
 [node name="MenuModulate" type="Control" parent="MenuPosition" unique_id=1583556355]
 layout_mode = 1

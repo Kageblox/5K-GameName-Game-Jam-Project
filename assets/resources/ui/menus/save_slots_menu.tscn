@@ -46,7 +46,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_ivm8b")
 entry_position = 1
+entry_transition = 10
 exit_position = 2
+exit_transition = 10
 metadata/_custom_type_script = "uid://d1gqgx2rvfewv"
 
 [node name="MenuModulate" type="Control" parent="MenuPosition" unique_id=1892529767]
