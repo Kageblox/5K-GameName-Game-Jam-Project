@@ -1,3 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+/export/
+
+# Ignore all dotfiles in the root directory only
+/.*

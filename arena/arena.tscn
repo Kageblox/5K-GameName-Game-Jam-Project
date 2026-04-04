@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://dhamyd4vegjd6"]
+
+[ext_resource type="Script" uid="uid://bjnpkmlltbppa" path="res://arena/arena.gd" id="1_dkqtx"]
+[ext_resource type="FontFile" uid="uid://c5sibf0nl0rmj" path="res://assets/fonts/Milkburgerevilinc-Regular.ttf" id="2_0gwdx"]
+[ext_resource type="Script" uid="uid://dmt7fbxwafga4" path="res://arena/fps_label.gd" id="2_u13ga"]
+[ext_resource type="FontFile" uid="uid://b1b8i63gv735" path="res://assets/fonts/Blackshadowmaybe-Regular.ttf" id="3_44uaw"]
+[ext_resource type="PackedScene" uid="uid://ckltep4un57ip" path="res://arena/player.tscn" id="3_dotur"]
+
+[sub_resource type="Environment" id="Environment_dkqtx"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_u13ga"]
+
+[sub_resource type="Compositor" id="Compositor_dotur"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8d55x"]
+line_spacing = 0.5
+font = ExtResource("3_44uaw")
+font_size = 64
+font_color = Color(1, 0.68235296, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0gwdx"]
+line_spacing = 1.0
+font = ExtResource("2_0gwdx")
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(1, 0.08235294, 0, 0.38039216)
+stacked_outline_count = 1
+stacked_outline_0/size = 2
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dkqtx"]
+absorbent = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_u13ga"]
+size = Vector3(100, 20, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u13ga"]
+
+[node name="Arena" type="Node3D" unique_id=1651207303]
+script = ExtResource("1_dkqtx")
+white_balls = false
+drop_height = 0.5
+layers = 5
+ball_count = 1000
+arena_width = 100
+drop_time = 1.5
+
+[node name="Ballpit" type="Node3D" parent="." unique_id=1412063318]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=485381545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.07727, 0)
+light_specular = 5.077
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=633469180]
+environment = SubResource("Environment_dkqtx")
+camera_attributes = SubResource("CameraAttributesPractical_u13ga")
+compositor = SubResource("Compositor_dotur")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2009680058]
+
+[node name="FPS" type="Label" parent="CanvasLayer" unique_id=1851296248]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 48
+script = ExtResource("2_u13ga")
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer" unique_id=2097482392]
+
+[node name="Message2" type="Label" parent="CanvasLayer/Node2D" unique_id=1206839073]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1595.0
+offset_top = 15.0
+offset_right = 1907.0
+offset_bottom = 158.0
+grow_horizontal = 0
+text = "BALLPIT
+BRAWL"
+label_settings = SubResource("LabelSettings_8d55x")
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="CanvasLayer/Node2D" unique_id=517125708]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1594.0
+offset_top = 15.0
+offset_right = 1906.0
+offset_bottom = 158.0
+grow_horizontal = 0
+text = "BALLPIT
+BRAWL"
+label_settings = SubResource("LabelSettings_0gwdx")
+horizontal_alignment = 1
+
+[node name="Node2D2" type="Node2D" parent="CanvasLayer" unique_id=1446435473]
+
+[node name="Node2D3" type="Node2D" parent="CanvasLayer" unique_id=739302549]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1611698575]
+
+[node name="Player" parent="." unique_id=1269980912 instance=ExtResource("3_dotur")]
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=956771834]
+transform = Transform3D(1, 0, 0, 0, 0.45254368, 0.8917423, 0, -0.8917423, 0.45254368, 0, 18.475916, 8.716454)
+current = true
+fov = 50.0
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1309975421]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.777279, 0)
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_dkqtx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=734563717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.1993408, 0)
+mesh = SubResource("BoxMesh_u13ga")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1996871123]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -43.49431, 0)
+shape = SubResource("BoxShape3D_u13ga")
+debug_fill = false
+
+[editable path="Player"]

@@ -20,7 +20,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	current_scene = get_tree().root.get_child(-1) as SceneInstance
 	get_tree().current_scene = current_scene
-	current_scene._scene_entry()
+	#current_scene._scene_entry()
 
 func _process(_delta: float) -> void:
 	if _loading_path != null:
