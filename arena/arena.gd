@@ -32,16 +32,16 @@ var ball_colors: Array[Color] = [
 	# Color("#88dd33"),
 	# Color("#3399ee"),
 
-	Color("#aa2233"),
-	Color("#2a8844"),
-	Color("#2a55bb"),
-	Color("#bb9922"),
-	Color("#aa3388"),
-	Color("#1a9999"),
-	Color("#bb5522"),
+	Color("#b32733"),
+	Color("#288e43"),
+	Color("#2852bb"),
+	Color("#bb991e"),
+	Color("#b33388"),
+	Color("#1b9d9d"),
+	Color("#bb591e"),
 	Color("#7733aa"),
-	Color("#66aa2a"),
-	Color("#2a77bb"),
+	Color("#68aa28"),
+	Color("#2877bb"),
 ]
 
 var colored_materials: Dictionary = {}
@@ -50,7 +50,7 @@ func _make_plastic_mat(color: Color = Color.WHITE, use_vertex_color: bool = fals
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = color
 	mat.metallic = 0.0
-	mat.metallic_specular = 0.8
+	mat.metallic_specular = 0.3
 	mat.roughness = 0.3
 	mat.rim_enabled = true
 	mat.rim = 0.4
