@@ -25,4 +25,3 @@ mesh = SubResource("CapsuleMesh_8oq5h")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="PlayerModel" unique_id=1187817555]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0.3752554, -0.5397962)
 mesh = SubResource("SphereMesh_8oq5h")
-
