@@ -89,6 +89,8 @@ func _enter_tree() -> void:
 		func(toggled_on: bool):
 			toggled.emit(toggled_on)
 			)
+			
+	focus_entered.connect(button.grab_focus)
 	
 	# When any menu starts opening, disable the button.
 	MenuManager.on_any_menu_opened_start.connect(

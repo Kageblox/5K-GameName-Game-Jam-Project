@@ -1,4 +1,7 @@
 [gd_resource type="LabelSettings" format=3 uid="uid://j4dw8hvgo5ux"]
 
+[ext_resource type="FontFile" uid="uid://daty6d5ecwsxo" path="res://assets/resources/ui/fonts/Milkburgerevilinc-Regular.ttf" id="1_aeeyy"]
+
 [resource]
+font = ExtResource("1_aeeyy")
 font_size = 36

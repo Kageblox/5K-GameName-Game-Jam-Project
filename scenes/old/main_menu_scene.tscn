@@ -4,8 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://cq1agth0rai6f" path="res://assets/resources/custom/custom_label_button.tscn" id="2_vfskp"]
 [ext_resource type="LabelSettings" uid="uid://j4dw8hvgo5ux" path="res://assets/resources/ui/label_settings/36_white_label_settings.tres" id="3_7hcs8"]
 
-[node name="MainMenuScene" type="Node" unique_id=783700535]
+[node name="MainMenuScene" type="Node" unique_id=783700535 node_paths=PackedStringArray("focus_control")]
 script = ExtResource("1_xhf6x")
+focus_control = NodePath("VBoxContainer/SinglePlayerButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1137221576]
 anchors_preset = -1
@@ -16,24 +17,43 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StartNewGameButton" parent="VBoxContainer" unique_id=1636015642 instance=ExtResource("2_vfskp")]
+[node name="SinglePlayerButton" parent="VBoxContainer" unique_id=1636015642 instance=ExtResource("2_vfskp")]
 layout_mode = 2
-text = "Start New Game"
+focus_neighbor_bottom = NodePath("../LocalButton")
+text = "Single Player"
 label_settings = ExtResource("3_7hcs8")
 horizontal_alignment = 1
 
-[node name="LoadGameButton" parent="VBoxContainer" unique_id=781908367 instance=ExtResource("2_vfskp")]
+[node name="LocalButton" parent="VBoxContainer" unique_id=781908367 instance=ExtResource("2_vfskp")]
 layout_mode = 2
-text = "Load Game"
+focus_neighbor_top = NodePath("../SinglePlayerButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+text = "Local"
+label_settings = ExtResource("3_7hcs8")
+horizontal_alignment = 1
+
+[node name="OnlineButton" parent="VBoxContainer" unique_id=519686552 instance=ExtResource("2_vfskp")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../SinglePlayerButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+text = "Online"
+label_settings = ExtResource("3_7hcs8")
+horizontal_alignment = 1
+
+[node name="CostumeRoomButton" parent="VBoxContainer" unique_id=1881269877 instance=ExtResource("2_vfskp")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../LocalButton")
+text = "Costume Room"
 label_settings = ExtResource("3_7hcs8")
 horizontal_alignment = 1
 
 [node name="SettingsButton" parent="VBoxContainer" unique_id=1726437648 instance=ExtResource("2_vfskp")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../LocalButton")
 text = "Settings"
 label_settings = ExtResource("3_7hcs8")
 horizontal_alignment = 1
 
-[connection signal="pressed" from="VBoxContainer/StartNewGameButton" to="." method="_on_start_new_game_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/LoadGameButton" to="." method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SinglePlayerButton" to="." method="_on_single_player_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CostumeRoomButton" to="." method="_on_costume_room_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]

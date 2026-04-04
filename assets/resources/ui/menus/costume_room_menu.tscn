@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://dekjlrnmmd3pl"]
+
+[ext_resource type="Script" uid="uid://nbq20eotpdnj" path="res://scripts/instance/menus/costume_room_menu.gd" id="1_kbh6n"]
+[ext_resource type="Script" uid="uid://dyfq8hktxbaf7" path="res://scripts/instance/menu_components/menu_color_rect.gd" id="2_fcbwh"]
+[ext_resource type="Script" uid="uid://d1gqgx2rvfewv" path="res://scripts/instance/menu_components/menu_position.gd" id="3_64yq5"]
+[ext_resource type="Script" uid="uid://d17kn7xassnid" path="res://scripts/instance/menu_components/menu_modulate.gd" id="4_vfro5"]
+[ext_resource type="LabelSettings" uid="uid://j4dw8hvgo5ux" path="res://assets/resources/ui/label_settings/36_white_label_settings.tres" id="5_bu0wr"]
+[ext_resource type="Texture2D" uid="uid://gbaggv7noegl" path="res://assets/textures/ui/delete_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" id="6_h4b53"]
+[ext_resource type="Texture2D" uid="uid://bl5ir0xi1gkmq" path="res://icon.svg" id="7_73mdp"]
+[ext_resource type="Texture2D" uid="uid://c8hnr3wonp12b" path="res://export/index.icon.png" id="8_58kiu"]
+[ext_resource type="PackedScene" uid="uid://cq1agth0rai6f" path="res://assets/resources/custom/custom_label_button.tscn" id="9_6hwtx"]
+[ext_resource type="LabelSettings" uid="uid://1u84ivmm06ca" path="res://assets/resources/ui/label_settings/16_white_label_settings.tres" id="10_8olbc"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h4vcb"]
+flip_faces = true
+top_radius = 2.0
+bottom_radius = 2.0
+height = 3.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8da5n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kbh6n"]
+size = Vector3(0.52, 0.345, 0.505)
+
+[node name="CostumeRoomMenu" type="Control" unique_id=1718198685 node_paths=PackedStringArray("focus_control")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kbh6n")
+focus_control = NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ReturnButton")
+
+[node name="MenuColorRect" type="ColorRect" parent="." unique_id=420238186]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+script = ExtResource("2_fcbwh")
+metadata/_custom_type_script = "uid://dyfq8hktxbaf7"
+
+[node name="MenuPosition" type="Control" parent="." unique_id=1239020626]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_64yq5")
+entry_position = 1
+exit_position = 2
+metadata/_custom_type_script = "uid://d1gqgx2rvfewv"
+
+[node name="MenuModulate" type="Control" parent="MenuPosition" unique_id=1928332586]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_vfro5")
+metadata/_custom_type_script = "uid://d17kn7xassnid"
+
+[node name="PanelContainer" type="PanelContainer" parent="MenuPosition/MenuModulate" unique_id=407845704]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.125
+anchor_right = 0.75
+anchor_bottom = 0.875
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer" unique_id=1754208615]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=2078758132]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/MarginContainer" unique_id=1265764544]
+layout_mode = 2
+text = "Costume Room"
+label_settings = ExtResource("5_bu0wr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1691126362]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer" unique_id=905955986]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer" unique_id=1376694558]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/SubViewportContainer" unique_id=4259418]
+handle_input_locally = false
+size = Vector2i(298, 396)
+render_target_update_mode = 4
+
+[node name="RoomMesh" type="MeshInstance3D" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport" unique_id=1831749482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_h4vcb")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport/RoomMesh" unique_id=663752651]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.5, 0)
+
+[node name="CameraPivot" type="Node3D" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport" unique_id=1338560939]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport/CameraPivot" unique_id=104494419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0427084)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport/CameraPivot/Camera3D" unique_id=1659840162]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport" unique_id=1794948165]
+mesh = SubResource("CapsuleMesh_8da5n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/MarginContainer/SubViewportContainer/SubViewport/MeshInstance3D" unique_id=1781855549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65848684, 0.50762963)
+mesh = SubResource("BoxMesh_kbh6n")
+
+[node name="TabContainer" type="TabContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer" unique_id=321733975]
+layout_mode = 2
+size_flags_horizontal = 3
+current_tab = 0
+tab_0/icon = ExtResource("6_h4b53")
+
+[node name="Shirt" type="VBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/TabContainer" unique_id=1966552374]
+layout_mode = 2
+metadata/_tab_index = 0
+metadata/_tab_name = ""
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Shirt" unique_id=542755003]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Shirt/ScrollContainer" unique_id=1539575157]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ItemList" type="ItemList" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Shirt/ScrollContainer/VBoxContainer" unique_id=454818852]
+layout_mode = 2
+size_flags_vertical = 3
+auto_width = true
+wraparound_items = false
+item_count = 6
+max_columns = 2
+same_column_width = true
+item_0/icon = ExtResource("7_73mdp")
+item_1/icon = ExtResource("7_73mdp")
+item_2/icon = ExtResource("7_73mdp")
+item_3/icon = ExtResource("7_73mdp")
+item_4/icon = ExtResource("8_58kiu")
+item_5/icon = ExtResource("8_58kiu")
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Shirt" unique_id=1742522017]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Shirt/MarginContainer" unique_id=2006782327]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Shirt/MarginContainer/HBoxContainer" unique_id=605115166]
+layout_mode = 2
+text = "Color:"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/HBoxContainer/TabContainer/Shirt/MarginContainer/HBoxContainer" unique_id=1964901075]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(1, 0, 0, 1)
+edit_alpha = false
+edit_intensity = false
+
+[node name="ApplyCostumeButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1636015642 instance=ExtResource("9_6hwtx")]
+layout_mode = 2
+text = "Apply Costume"
+label_settings = ExtResource("10_8olbc")
+horizontal_alignment = 1
+
+[node name="ReturnButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1131234686 instance=ExtResource("9_6hwtx")]
+layout_mode = 2
+text = "Return"
+label_settings = ExtResource("10_8olbc")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ApplyCostumeButton" to="." method="_on_apply_costume_button_pressed"]
+[connection signal="pressed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]

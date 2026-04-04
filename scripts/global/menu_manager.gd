@@ -11,9 +11,17 @@ var question_menu_resource = preload("res://assets/resources/ui/menus/question_m
 var settings_menu_resource = preload("res://assets/resources/ui/menus/settings_menu.tscn") as Resource
 var save_slots_menu_resource = preload("res://assets/resources/ui/menus/save_slots_menu.tscn") as Resource
 var pause_menu_resource = preload("res://assets/resources/ui/menus/pause_menu.tscn") as Resource
+var costume_room_menu_resource = preload("res://assets/resources/ui/menus/costume_room_menu.tscn") as Resource
+
 
 ## The foremost menu's child index. -1 if there are no open menus.
 @export var foremost_menu_index = -1
+
+func get_foremost_menu() -> MenuInstance:
+	if foremost_menu_index < 0:
+		return null
+	else:
+		return get_child(MenuManager.foremost_menu_index) as MenuInstance
 
 ## Opens a Question Menu.[br]
 ## Parameters:[br]
@@ -25,7 +33,7 @@ func open_question_menu(question: String, answers: Dictionary[String, Callable])
 
 ## Opens a Settings Menu.
 func open_settings_menu() -> void:
-	var settings_menu = settings_menu_resource.instantiate() as Settings_Menu
+	var settings_menu = settings_menu_resource.instantiate() as SettingsMenu
 	_open_menu(settings_menu)
 
 ## Opens a Save Slots Menu.[br]
@@ -44,6 +52,11 @@ func open_save_slots_menu(save_slot_menu_variant: SaveSlotsMenu.SaveSlotMenuVari
 func open_pause_menu() -> void:
 	var pause_menu = pause_menu_resource.instantiate() as PauseMenu
 	_open_menu(pause_menu)
+	
+## Opens a Costume Room Menu.
+func open_costume_room_menu() -> void:
+	var costume_room_menu = costume_room_menu_resource.instantiate() as CostumeRoomMenu
+	_open_menu(costume_room_menu)
 
 ## Closes all Menus.[br]
 ## Parameters:[br]

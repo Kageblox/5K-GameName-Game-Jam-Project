@@ -1,6 +1,48 @@
 class_name PauseMenu
 extends MenuInstance
 
+@export_group("Background Music Audio Effects")
+@export var background_music_active_effect_params : Array[AudioEffect]
+@export var background_music_inactive_effect_params : Array[AudioEffect]
+
+@export_group("Sound Effects Audio Effects")
+@export var sound_effects_active_effect_params : Array[AudioEffect]
+@export var sound_effects_inactive_effect_params : Array[AudioEffect]
+
+func open(_params: Array[Variant] = [])-> void:
+	for i in background_music_active_effect_params.size():
+		AudioManager.add_bus_effect(
+			"Background Music", 
+			background_music_active_effect_params[i],
+			background_music_inactive_effect_params[i],
+			open_duration,
+			"PauseMenu" + str(i)
+			)
+	for i in sound_effects_active_effect_params.size():
+		AudioManager.add_bus_effect(
+			"Sound Effects", 
+			sound_effects_active_effect_params[i],
+			sound_effects_inactive_effect_params[i],
+			open_duration,
+			"PauseMenu" + str(i)
+			)
+	super()
+
+func close() -> void:
+	for i in background_music_active_effect_params.size():
+		AudioManager.remove_bus_effect_from_name(
+			"Background Music", 
+			"PauseMenu" + str(i),
+			close_duration
+			)
+	for i in sound_effects_active_effect_params.size():
+		AudioManager.remove_bus_effect_from_name(
+			"Background Music", 
+			"PauseMenu" + str(i),
+			close_duration
+			)
+	super()
+
 func _on_quick_save_button_pressed() -> void:
 	var current_save_slot = SaveManager.current_game_data.save_slot
 

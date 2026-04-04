@@ -1,4 +1,4 @@
-class_name Settings_Menu
+class_name SettingsMenu
 extends MenuInstance
 
 @export var background_music_slider: Slider

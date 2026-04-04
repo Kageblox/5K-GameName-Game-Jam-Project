@@ -8,7 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://cq1agth0rai6f" path="res://assets/resources/custom/custom_label_button.tscn" id="6_jx8ff"]
 [ext_resource type="LabelSettings" uid="uid://1u84ivmm06ca" path="res://assets/resources/ui/label_settings/16_white_label_settings.tres" id="7_mctrh"]
 
-[node name="PauseMenu" type="Control" unique_id=2059768895]
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_sf85l"]
+cutoff_hz = 9449.0
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_nh1f2"]
+cutoff_hz = 769.0
+
+[node name="PauseMenu" type="Control" unique_id=2059768895 node_paths=PackedStringArray("focus_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,9 +22,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o0mlv")
+background_music_active_effect_params = Array[AudioEffect]([SubResource("AudioEffectHighPassFilter_sf85l")])
+background_music_inactive_effect_params = Array[AudioEffect]([SubResource("AudioEffectHighPassFilter_nh1f2")])
 open_duration = 0.75
 close_duration = 0.75
 background_click_closes_menu = true
+focus_control = NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ContinueGameButton")
 
 [node name="MenuColorRect" type="ColorRect" parent="." unique_id=1459416955]
 layout_mode = 1
@@ -81,39 +90,51 @@ horizontal_alignment = 1
 
 [node name="QuickSaveButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1636015642 instance=ExtResource("6_jx8ff")]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../SaveGameButton")
 text = "Quick Save"
 label_settings = ExtResource("7_mctrh")
 horizontal_alignment = 1
 
 [node name="SaveGameButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=162831784 instance=ExtResource("6_jx8ff")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../QuickSaveButton")
+focus_neighbor_bottom = NodePath("../LoadGameButton")
 text = "Save Game"
 label_settings = ExtResource("7_mctrh")
 horizontal_alignment = 1
 
 [node name="LoadGameButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=604410045 instance=ExtResource("6_jx8ff")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../SaveGameButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
 text = "Load Game"
 label_settings = ExtResource("7_mctrh")
 horizontal_alignment = 1
 
 [node name="SettingsButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=104940562 instance=ExtResource("6_jx8ff")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../LoadGameButton")
+focus_neighbor_bottom = NodePath("../ReturnToMainMenuButton")
 text = "Settings"
 label_settings = ExtResource("7_mctrh")
 horizontal_alignment = 1
 
 [node name="ReturnToMainMenuButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1124747025 instance=ExtResource("6_jx8ff")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../ContinueGameButton")
 text = "Return to Main Menu"
 label_settings = ExtResource("7_mctrh")
 horizontal_alignment = 1
 
 [node name="ContinueGameButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=400570110 instance=ExtResource("6_jx8ff")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ReturnToMainMenuButton")
 text = "Continue Game"
 label_settings = ExtResource("7_mctrh")
 horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=338384699]
 
 [connection signal="pressed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/QuickSaveButton" to="." method="_on_quick_save_button_pressed"]
 [connection signal="pressed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/SaveGameButton" to="." method="_on_save_game_button_pressed"]

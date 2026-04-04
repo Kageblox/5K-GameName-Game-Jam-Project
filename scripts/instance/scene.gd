@@ -8,6 +8,7 @@ signal on_scene_exit()
 const PAUSE_BUTTON_RESOURCE: Resource = preload("res://assets/resources/ui/buttons/pause_button.tscn")
 
 @export var pausable = false
+@export var focus_control: Control
 
 var pause_button = null
 

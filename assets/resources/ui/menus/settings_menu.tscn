@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cq1agth0rai6f" path="res://assets/resources/custom/custom_label_button.tscn" id="6_pc1u8"]
 [ext_resource type="LabelSettings" uid="uid://1u84ivmm06ca" path="res://assets/resources/ui/label_settings/16_white_label_settings.tres" id="7_1asuv"]
 
-[node name="SettingsMenu" type="Control" unique_id=1718198685 node_paths=PackedStringArray("background_music_slider", "sound_effects_slider", "apply_modified_button")]
+[sub_resource type="Theme" id="Theme_1asuv"]
+
+[node name="SettingsMenu" type="Control" unique_id=1718198685 node_paths=PackedStringArray("background_music_slider", "sound_effects_slider", "apply_modified_button", "focus_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +25,7 @@ apply_modified_button = NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxC
 open_duration = 0.75
 close_duration = 0.75
 background_click_closes_menu = true
+focus_control = NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ReturnButton")
 
 [node name="MenuColorRect" type="ColorRect" parent="." unique_id=420238186]
 layout_mode = 1
@@ -100,6 +103,7 @@ label_settings = ExtResource("5_mugga")
 
 [node name="MarginContainer" type="MarginContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1591644612]
 layout_mode = 2
+theme = SubResource("Theme_1asuv")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -120,6 +124,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.5
+focus_neighbor_bottom = NodePath("../../../MarginContainer2/HBoxContainer/SoundEffectsSlider")
 max_value = 1.0
 step = 0.01
 value = 0.5
@@ -149,6 +154,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.5
+focus_neighbor_top = NodePath("../../../MarginContainer/HBoxContainer/BackgroundMusicSlider")
+focus_neighbor_bottom = NodePath("../../../../ApplyModifiedButton")
 max_value = 1.0
 step = 0.01
 value = 0.5
@@ -159,26 +166,26 @@ ticks_position = 3
 [node name="ApplyModifiedButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=297622204 instance=ExtResource("6_pc1u8")]
 visible = false
 layout_mode = 2
+focus_neighbor_top = NodePath("../VBoxContainer/MarginContainer2/HBoxContainer/SoundEffectsSlider")
+focus_neighbor_bottom = NodePath("../RestoreDefaultButton")
 text = "Apply Modified"
 label_settings = ExtResource("7_1asuv")
 horizontal_alignment = 1
 
 [node name="RestoreDefaultButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1659529975 instance=ExtResource("6_pc1u8")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ApplyModifiedButton")
+focus_neighbor_bottom = NodePath("../ReturnButton")
 text = "Restore Default"
 label_settings = ExtResource("7_1asuv")
 horizontal_alignment = 1
 
 [node name="ReturnButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1636015642 instance=ExtResource("6_pc1u8")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../RestoreDefaultButton")
 text = "Return"
 label_settings = ExtResource("7_1asuv")
 horizontal_alignment = 1
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1817221433]
-process_mode = 3
-
-[node name="Timer" type="Timer" parent="AudioStreamPlayer" unique_id=507836064]
 
 [connection signal="value_changed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/BackgroundMusicSlider" to="." method="_on_background_volume_slider_value_changed"]
 [connection signal="value_changed" from="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/SoundEffectsSlider" to="." method="_on_sound_effects_volume_slider_value_changed"]

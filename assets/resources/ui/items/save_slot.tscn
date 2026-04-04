@@ -11,6 +11,7 @@
 [ext_resource type="LabelSettings" uid="uid://4ikws4b4fj47" path="res://assets/resources/ui/label_settings/16_grey_label_settings.tres" id="8_qjcgv"]
 
 [node name="SaveSlot" type="PanelContainer" unique_id=620820157 node_paths=PackedStringArray("save_slot_button", "loaded", "empty", "delete_button", "last_saved_label")]
+focus_mode = 2
 mouse_filter = 2
 script = ExtResource("1_jigy7")
 save_slot_button = NodePath("SaveSlotButton")

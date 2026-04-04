@@ -6,6 +6,7 @@
 self_modulate = Color(1, 1, 1, 0)
 offset_right = 9.0
 offset_bottom = 20.0
+focus_mode = 2
 mouse_filter = 2
 script = ExtResource("1_k3kri")
 

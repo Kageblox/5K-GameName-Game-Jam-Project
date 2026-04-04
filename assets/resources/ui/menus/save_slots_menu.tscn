@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cq1agth0rai6f" path="res://assets/resources/custom/custom_label_button.tscn" id="6_ltqx3"]
 [ext_resource type="LabelSettings" uid="uid://1u84ivmm06ca" path="res://assets/resources/ui/label_settings/16_white_label_settings.tres" id="7_rip2s"]
 
-[node name="SaveSlotsMenu" type="Control" unique_id=297150180 node_paths=PackedStringArray("save_slots_header_label", "autosave_container", "save_slots")]
+[node name="SaveSlotsMenu" type="Control" unique_id=297150180 node_paths=PackedStringArray("save_slots_header_label", "autosave_container", "save_slots", "focus_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +24,7 @@ save_slots = [NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/S
 open_duration = 0.75
 close_duration = 0.75
 background_click_closes_menu = true
+focus_control = NodePath("MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ReturnButton")
 
 [node name="MenuColorRect" type="ColorRect" parent="." unique_id=511419465]
 layout_mode = 1
@@ -92,18 +93,27 @@ size_flags_vertical = 3
 
 [node name="SaveSlot1" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer" unique_id=620820157 instance=ExtResource("6_ketdt")]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../SaveSlot2")
 
 [node name="SaveSlot2" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer" unique_id=2029436453 instance=ExtResource("6_ketdt")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../SaveSlot1")
+focus_neighbor_bottom = NodePath("../SaveSlot3")
 
 [node name="SaveSlot3" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer" unique_id=406381699 instance=ExtResource("6_ketdt")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../SaveSlot2")
+focus_neighbor_bottom = NodePath("../SaveSlot4")
 
 [node name="SaveSlot4" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer" unique_id=114895056 instance=ExtResource("6_ketdt")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../SaveSlot3")
+focus_neighbor_bottom = NodePath("../SaveSlot5")
 
 [node name="SaveSlot5" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/ScrollContainer/SaveSlotsContainer" unique_id=1527422210 instance=ExtResource("6_ketdt")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../SaveSlot4")
+focus_neighbor_bottom = NodePath("../../../AutosaveContainer/SaveSlot6")
 
 [node name="AutosaveContainer" type="VBoxContainer" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=2001863759]
 layout_mode = 2
@@ -124,9 +134,12 @@ label_settings = ExtResource("5_l287i")
 
 [node name="SaveSlot6" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer/AutosaveContainer" unique_id=1015536328 instance=ExtResource("6_ketdt")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../../ScrollContainer/SaveSlotsContainer/SaveSlot5")
+focus_neighbor_bottom = NodePath("../../ReturnButton")
 
 [node name="ReturnButton" parent="MenuPosition/MenuModulate/PanelContainer/VBoxContainer" unique_id=1636015642 instance=ExtResource("6_ltqx3")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../AutosaveContainer/SaveSlot6")
 text = "Return"
 label_settings = ExtResource("7_rip2s")
 horizontal_alignment = 1
