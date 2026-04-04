@@ -7,6 +7,7 @@ extends Node3D
 @export var ball_count: int = 500
 @export var arena_width: int = 50
 @export var arena_height: int = 50
+@export var drop_time: float = 1.0
 @export var depth_texture_size: int = 2048
 
 @onready var ballpit: Node3D = $Ballpit
@@ -62,7 +63,7 @@ func _ready():
 
 		if not final:
 			var balls_timer = Timer.new()
-			balls_timer.wait_time = 1.0
+			balls_timer.wait_time = drop_time
 			balls_timer.one_shot = true
 			balls_timer.timeout.connect(bake_balls.bind(balls))
 			add_child(balls_timer)
@@ -75,8 +76,13 @@ func _ready():
 		layer_timer.start()
 		await layer_timer.timeout
 
+	var extra_timer = Timer.new()
+	extra_timer.wait_time = 2.0
+	extra_timer.one_shot = true
+	add_child(extra_timer)
+	extra_timer.start()
+	await extra_timer.timeout
 	canvas.queue_free()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	## Top-down rasterizer (disabled)
 	#var snap_timer = Timer.new()

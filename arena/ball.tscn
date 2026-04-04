@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://xb61hb2scmpt"]
 
-[ext_resource type="Script" path="res://arena/ball.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cm67o3nm213tq" path="res://arena/ball.gd" id="1_script"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4ck4e"]
 friction = 10.0
@@ -10,17 +10,20 @@ absorbent = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_6ahlc"]
 material = SubResource("StandardMaterial3D_4ck4e")
+radial_segments = 30
+rings = 15
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8k60m"]
 
 [node name="Ball" type="RigidBody3D" unique_id=2022834685]
-script = ExtResource("1_script")
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 disable_mode = 2
 collision_layer = 8
 collision_mask = 15
 physics_material_override = SubResource("PhysicsMaterial_4ck4e")
+gravity_scale = 3.0
 continuous_cd = true
+script = ExtResource("1_script")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=942883918]
 cast_shadow = 0
