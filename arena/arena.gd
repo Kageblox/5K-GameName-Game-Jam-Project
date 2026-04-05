@@ -217,6 +217,10 @@ func _create_debug_menu() -> void:
 	cull_check.toggled.connect(func(on): distance_culling = on; _update_cell_visibility())
 	vbox.add_child(cull_check)
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		get_tree().quit()
+
 func _process(_delta: float) -> void:
 	if not distance_culling or not player_node:
 		return
