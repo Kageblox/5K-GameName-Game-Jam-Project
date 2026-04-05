@@ -15,6 +15,12 @@ extends CharacterBody3D
 @export var breath_regen_rate: float = 0.5
 @export var camera_offset: Vector3 = Vector3(0, 24, 14)
 @export var use_mouse_aim: bool = true
+@export var camera_follows_rotation: bool = false
+@export var third_person_mode: bool = false
+@export var mouse_sensitivity: float = 0.003
+@export var tp_camera_offset: Vector3 = Vector3(0, 12, 8)
+@export var tp_look_ahead: float = 15.0
+@export var tp_camera_back: float = 6.0
 
 @onready var player_model: Node3D = $PlayerModel
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
@@ -31,10 +37,11 @@ var dash_timer: float = 0.0
 var dash_direction: Vector3 = Vector3.ZERO
 var breath: float = 1.0
 var crosshair: Control
+var tp_yaw: float = 0.0
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	_create_crosshair()
+	_apply_camera_mode()
 	model_base_y = player_model.position.y
 	breath = breath_max
 	camera.position = camera_offset
@@ -44,7 +51,7 @@ func _ready() -> void:
 
 func _create_crosshair() -> void:
 	var canvas = CanvasLayer.new()
-	canvas.layer = 100
+	canvas.layer = 98
 	add_child(canvas)
 	crosshair = CrosshairDraw.new()
 	canvas.add_child(crosshair)
@@ -55,12 +62,36 @@ func _set_visibility_layer_recursive(node: Node, layer: int) -> void:
 	for child in node.get_children():
 		_set_visibility_layer_recursive(child, layer)
 
+func _apply_camera_mode() -> void:
+	crosshair.visible = true
+	if third_person_mode:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+		camera.position = camera_offset
+		camera.look_at(global_position, Vector3.UP)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_F1:
+		third_person_mode = not third_person_mode
+		_apply_camera_mode()
+		return
+	if third_person_mode and event is InputEventMouseMotion:
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			tp_yaw -= event.relative.x * mouse_sensitivity
+
 func _physics_process(delta: float) -> void:
 	# Crouch (hold)
 	crouching = Input.is_action_pressed("crouch")
 
 	var move_input := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var move_direction := Vector3(move_input.x, 0, move_input.y).normalized()
+
+	# Make movement relative to camera/player facing
+	if third_person_mode and move_direction != Vector3.ZERO:
+		move_direction = move_direction.rotated(Vector3.UP, tp_yaw)
+	elif camera_follows_rotation and move_direction != Vector3.ZERO:
+		move_direction = move_direction.rotated(Vector3.UP, player_model.rotation.y)
 
 	# Dash
 	if Input.is_action_just_pressed("dash") and not dashing and breath >= dash_duration:
@@ -104,29 +135,33 @@ func _physics_process(delta: float) -> void:
 		bob_timer = 0.0
 
 	# Aim
-	var aim_input := Input.get_vector("aim_left", "aim_right", "aim_forward", "aim_backward")
-	var aim_direction := Vector3(aim_input.x, 0, -aim_input.y).normalized()
+	if third_person_mode:
+		last_aim_direction = Vector3(-sin(tp_yaw), 0, cos(tp_yaw))
+		player_model.rotation.y = tp_yaw
+	else:
+		var aim_input := Input.get_vector("aim_left", "aim_right", "aim_forward", "aim_backward")
+		var aim_direction := Vector3(aim_input.x, 0, -aim_input.y).normalized()
 
-	if aim_direction != Vector3.ZERO:
-		last_aim_direction = aim_direction
-	elif use_mouse_aim:
-		if camera:
-			var mouse_pos = get_viewport().get_mouse_position()
-			var from = camera.project_ray_origin(mouse_pos)
-			var dir = camera.project_ray_normal(mouse_pos)
-			if dir.y != 0:
-				var t = (global_position.y - from.y) / dir.y
-				var hit = from + dir * t
-				var mouse_dir = hit - global_position
-				mouse_dir.y = 0
-				if mouse_dir.length() > 0.1:
-					mouse_dir = mouse_dir.normalized()
-					last_aim_direction = Vector3(mouse_dir.x, 0, -mouse_dir.z)
-	elif move_direction != Vector3.ZERO:
-		last_aim_direction = Vector3(move_direction.x, 0, -move_direction.z)
+		if aim_direction != Vector3.ZERO:
+			last_aim_direction = aim_direction
+		elif use_mouse_aim:
+			if camera:
+				var mouse_pos = get_viewport().get_mouse_position()
+				var from = camera.project_ray_origin(mouse_pos)
+				var dir = camera.project_ray_normal(mouse_pos)
+				if dir.y != 0:
+					var t = (global_position.y - from.y) / dir.y
+					var hit = from + dir * t
+					var mouse_dir = hit - global_position
+					mouse_dir.y = 0
+					if mouse_dir.length() > 0.1:
+						mouse_dir = mouse_dir.normalized()
+						last_aim_direction = Vector3(mouse_dir.x, 0, -mouse_dir.z)
+		elif move_direction != Vector3.ZERO:
+			last_aim_direction = Vector3(move_direction.x, 0, -move_direction.z)
 
-	var target_angle = atan2(-last_aim_direction.x, last_aim_direction.z)
-	player_model.rotation.y = lerp_angle(player_model.rotation.y, target_angle, rotation_speed * delta)
+		var target_angle = atan2(-last_aim_direction.x, last_aim_direction.z)
+		player_model.rotation.y = lerp_angle(player_model.rotation.y, target_angle, rotation_speed * delta)
 
 	# Shoot (not while dashing)
 	shoot_timer -= delta
@@ -134,12 +169,28 @@ func _physics_process(delta: float) -> void:
 		shoot_timer = shoot_cooldown
 		_shoot()
 
+	# Camera
+	if third_person_mode:
+		var forward = Vector3(-sin(tp_yaw), 0, -cos(tp_yaw))
+		var look_target = forward * tp_look_ahead
+		var rotated_offset = tp_camera_offset.rotated(Vector3.UP, tp_yaw)
+		camera.position = rotated_offset - forward * tp_camera_back
+		camera.look_at(global_position + look_target, Vector3.UP)
+	elif camera_follows_rotation:
+		var rotated_offset = camera_offset.rotated(Vector3.UP, player_model.rotation.y)
+		camera.position = rotated_offset
+		camera.look_at(global_position, Vector3.UP)
+	else:
+		camera.position = camera_offset
+		camera.look_at(global_position, Vector3.UP)
+
 func _shoot() -> void:
 	var shoot_dir = Vector3(last_aim_direction.x, 0, -last_aim_direction.z)
 	var ball = ball_scene.instantiate()
 	ball.position = global_position + Vector3(0, 5, 0) + shoot_dir * 3.0
 	ball.freeze = false
-	ball.lifetime = 3.0
+	ball.gravity_scale = 1.0
+	ball.lifetime = 1.0
 	ball.collision_mask = 7
 	get_parent().add_child(ball)
 	ball.linear_velocity = shoot_dir * shoot_speed
@@ -151,7 +202,6 @@ class CrosshairDraw extends Control:
 	var circle_radius := 24.0
 	var color := Color.WHITE
 	var outline_color := Color.BLACK
-
 	func _ready() -> void:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 		set_anchors_preset(PRESET_FULL_RECT)
