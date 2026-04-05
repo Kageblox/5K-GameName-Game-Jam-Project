@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://ckltep4un57ip" path="res://arena/player.tscn" id="3_dotur"]
 
 [sub_resource type="Environment" id="Environment_dkqtx"]
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_u13ga"]
 
@@ -33,7 +35,7 @@ background_mode = 1
 background_color = Color(1, 1, 1, 1)
 background_energy_multiplier = 12.4
 ambient_light_source = 2
-ambient_light_color = Color(0.91, 0.89559174, 0.7371, 1)
+ambient_light_color = Color(0.46, 0.46, 0.46, 1)
 fog_enabled = true
 fog_light_color = Color(0, 0, 0, 1)
 
@@ -50,12 +52,13 @@ size = Vector3(200, 20, 200)
 script = ExtResource("1_dkqtx")
 white_balls = false
 drop_height = 0.01
-layers = 30
+layers = 20
 ball_count = 2000
 first_layer_ball_count = 2000
-final_layer_ball_count = 1000
+final_layer_ball_count = 2000
 arena_width = 200
 arena_height = 200
+cull_distance = 100.0
 
 [node name="Ballpit" type="Node3D" parent="." unique_id=1412063318]
 
@@ -72,6 +75,7 @@ compositor = SubResource("Compositor_dotur")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2009680058]
 
 [node name="FPS" type="Label" parent="CanvasLayer" unique_id=1851296248]
+process_mode = 4
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 48
@@ -133,12 +137,10 @@ fov = 50.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Player/Camera3D" unique_id=1819351880]
 transform = Transform3D(-0.70353115, -0.32160667, -0.6337295, 0.3216067, 0.6511241, -0.687464, 0.6337296, -0.687464, -0.35465518, 0, 0, 0)
-visible = false
 shadow_enabled = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Player/Camera3D" unique_id=2067604056]
 transform = Transform3D(1, 0, 0, 0, 0.45254368, -0.8917423, 0, 0.8917423, 0.45254368, 0, 14.144577, 8.611023)
-visible = false
 light_color = Color(1, 0.96, 0.96066666, 1)
 light_energy = 16.0
 light_indirect_energy = 16.0
@@ -148,7 +150,6 @@ omni_attenuation = 10.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player/Camera3D" unique_id=462301711]
 transform = Transform3D(0.998355, 0, -0.05733753, 0.025947718, 0.8917423, 0.45179918, 0.051130265, -0.45254368, 0.89027524, 0, 24.713017, 29.436247)
-visible = false
 light_energy = 16.0
 light_indirect_energy = 16.0
 light_size = 1.0

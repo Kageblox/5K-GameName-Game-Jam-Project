@@ -13,6 +13,8 @@ extends Node3D
 @export var depth_texture_size: int = 2048
 @export var grid_cells: int = 4
 @export var batch_spawn: bool = false
+@export var distance_culling: bool = true
+@export var cull_distance: float = 80.0
 
 @onready var ballpit: Node3D = $Ballpit
 @onready var floor_mesh: MeshInstance3D = $Floor/MeshInstance3D
@@ -21,30 +23,33 @@ extends Node3D
 var ball_scene = preload("res://arena/ball.tscn")
 
 var ball_colors: Array[Color] = [
-	# Color("#ee3344"),
-	# Color("#33bb55"),
-	# Color("#3366ee"),
-	# Color("#eecc22"),
-	# Color("#ee44aa"),
-	# Color("#22cccc"),
-	# Color("#ee7722"),
-	# Color("#9944dd"),
-	# Color("#88dd33"),
-	# Color("#3399ee"),
+	Color("#ee3344"),
+	Color("#33bb55"),
+	Color("#3366ee"),
+	Color("#eecc22"),
+	Color("#ee44aa"),
+	Color("#22cccc"),
+	Color("#ee7722"),
+	Color("#9944dd"),
+	Color("#88dd33"),
+	Color("#3399ee"),
 
-	Color("#b32733"),
-	Color("#288e43"),
-	Color("#2852bb"),
-	Color("#bb991e"),
-	Color("#b33388"),
-	Color("#1b9d9d"),
-	Color("#bb591e"),
-	Color("#7733aa"),
-	Color("#68aa28"),
-	Color("#2877bb"),
+	# Color("#b32733"),
+	# Color("#288e43"),
+	# Color("#2852bb"),
+	# Color("#bb991e"),
+	# Color("#b33388"),
+	# Color("#1b9d9d"),
+	# Color("#bb591e"),
+	# Color("#7733aa"),
+	# Color("#68aa28"),
+	# Color("#2877bb"),
 ]
 
 var colored_materials: Dictionary = {}
+var cell_data: Array = []  # [{node, center}]
+var player_node: Node3D = null
+var debug_menu: PanelContainer
 
 func _make_plastic_mat(color: Color = Color.WHITE, use_vertex_color: bool = false) -> StandardMaterial3D:
 	var mat = StandardMaterial3D.new()
@@ -52,9 +57,9 @@ func _make_plastic_mat(color: Color = Color.WHITE, use_vertex_color: bool = fals
 	mat.metallic = 0.0
 	mat.metallic_specular = 0.3
 	mat.roughness = 0.3
-	mat.rim_enabled = true
-	mat.rim = 0.4
-	mat.rim_tint = 0.3
+	# mat.rim_enabled = true
+	# mat.rim = 1.0
+	# mat.rim_tint = 0.3
 	if use_vertex_color:
 		mat.vertex_color_use_as_albedo = true
 	return mat
@@ -135,6 +140,9 @@ func _ready():
 	if player:
 		player.get_node("CollisionShape3D").disabled = false
 		player.process_mode = Node.PROCESS_MODE_INHERIT
+	player_node = player
+
+	_create_debug_menu()
 
 	## Top-down rasterizer (disabled)
 	#var snap_timer = Timer.new()
@@ -177,6 +185,54 @@ func _ready():
 	#mat.albedo_texture = tex
 	#mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	#floor_mesh.material_override = mat
+
+func _create_debug_menu() -> void:
+	var canvas = CanvasLayer.new()
+	canvas.layer = 100
+	add_child(canvas)
+
+	debug_menu = PanelContainer.new()
+	debug_menu.position = Vector2(10, 40)
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0, 0, 0, 0.6)
+	style.set_content_margin_all(8)
+	style.set_corner_radius_all(4)
+	debug_menu.add_theme_stylebox_override("panel", style)
+	canvas.add_child(debug_menu)
+
+	var vbox = VBoxContainer.new()
+	debug_menu.add_child(vbox)
+
+	var title = Label.new()
+	title.text = "Debug"
+	title.add_theme_font_size_override("font_size", 16)
+	title.add_theme_color_override("font_color", Color.WHITE)
+	vbox.add_child(title)
+
+	var cull_check = CheckBox.new()
+	cull_check.text = "Distance Culling"
+	cull_check.button_pressed = distance_culling
+	cull_check.add_theme_font_size_override("font_size", 14)
+	cull_check.add_theme_color_override("font_color", Color.WHITE)
+	cull_check.toggled.connect(func(on): distance_culling = on; _update_cell_visibility())
+	vbox.add_child(cull_check)
+
+func _process(_delta: float) -> void:
+	if not distance_culling or not player_node:
+		return
+	var player_pos = player_node.global_position
+	for data in cell_data:
+		var dist = player_pos.distance_to(data.center)
+		data.node.visible = dist <= cull_distance
+
+func _update_cell_visibility() -> void:
+	if distance_culling and player_node:
+		var player_pos = player_node.global_position
+		for data in cell_data:
+			data.node.visible = player_pos.distance_to(data.center) <= cull_distance
+	else:
+		for data in cell_data:
+			data.node.visible = true
 
 func _bake_layer(count: int, snap_y: float) -> void:
 	var half_w = arena_width / 2.0
@@ -430,6 +486,7 @@ func _bake_as_particles(parent: Node3D, transforms: Array, colors: Array) -> voi
 	proc_mat.spread = 0.0
 	proc_mat.initial_velocity_min = 0.0
 	proc_mat.initial_velocity_max = 0.0
+
 	proc_mat.gravity = Vector3.ZERO
 
 	var mesh = SphereMesh.new()
@@ -461,6 +518,8 @@ func _add_cell_notifier(cell_node: Node3D, cell: Vector2i) -> void:
 	var cell_min_x = -half_w + cell.x * cell_w
 	var cell_min_z = -half_h + cell.y * cell_h
 	var center = Vector3(cell_min_x + cell_w / 2.0, 5.0, cell_min_z + cell_h / 2.0)
+
+	cell_data.append({node = cell_node, center = center})
 
 	var notifier = VisibleOnScreenNotifier3D.new()
 	notifier.name = "Notifier_%d_%d" % [cell.x, cell.y]

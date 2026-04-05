@@ -189,8 +189,8 @@ func _shoot() -> void:
 	var ball = ball_scene.instantiate()
 	ball.position = global_position + Vector3(0, 5, 0) + shoot_dir * 3.0
 	ball.freeze = false
-	ball.gravity_scale = 0.0
-	ball.lifetime = 3.0
+	ball.gravity_scale = 1.0
+	ball.lifetime = 1.0
 	ball.collision_mask = 7
 	get_parent().add_child(ball)
 	ball.linear_velocity = shoot_dir * shoot_speed
